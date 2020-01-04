@@ -351,8 +351,7 @@ fn main() -> amethyst::Result<()> {
     );*/
 
     let noclip = NoClip::<StringBindings>::new(String::from("noclip"));
-
-    let mut world = World::new();
+    let (auto_save_sys, auto_save_dirty) = AutoSaveSystem::<Auth>::new(resources_directory.to_str().unwrap().to_owned() + "/../auth_token.ron");
 
     let game_data = GameDataBuilder::default()
         .with(RelativeTimerSystem, "relative_timer", &[])
@@ -366,7 +365,7 @@ fn main() -> amethyst::Result<()> {
             "gltf_loader",
             &["map_loader"],
         ).with(
-            FPSRotationRhusicsSystem::<String, String>::new(0.005, 0.005, &mut world),
+            FPSRotationRhusicsSystem::<String, String>::new(0.005, 0.005),
             "free_rotation",
             &[],
         ).with_system_desc(MouseFocusUpdateSystemDesc::default(), "mouse_focus", &[])
@@ -397,7 +396,7 @@ fn main() -> amethyst::Result<()> {
         .with_bundle(
             InputBundle::<StringBindings>::new().with_bindings_from_file(&key_bindings_path)?,
         )?.with_bundle(UiBundle::<StringBindings>::new())?
-        .with(AutoSaveSystem::<Auth>::new(resources_directory.to_str().unwrap().to_owned() + "/../auth_token.ron", &mut world), "auth_token_save", &[])        .with_barrier()
+        .with(auto_save_sys, "auth_token_save", &[])        .with_barrier()
         .with_bundle(PhysicsBundle::<f32, Transform>::new(Vector3::new(0.0, 0.0, 0.0), &[]))? // TODO: fix gravity value
         //.with(ForceUprightSystem::default(), "force_upright", &["sync_bodies_from_physics_system"])
         /*.with_bundle(RenderBundle::new(pipe, Some(display_config))
@@ -423,9 +422,14 @@ fn main() -> amethyst::Result<()> {
     .with_resource(AssetLoaderInternal::<Prefab<GltfPrefab>>::new())
     .with_resource(noclip)
     .with_resource(Widgets::<UiButton, String>::default());
-    if let Ok(discord) = init_discord_rich_presence() {
-        game_builder = game_builder.with_resource(discord);
+    if let Some(dirty) = auto_save_dirty {
+        game_builder = game_builder.with_resource(dirty);
     }
+
+    // TODO: fix discord presence
+    /*if let Ok(discord) = init_discord_rich_presence() {
+        game_builder = game_builder.with_resource(discord);
+    }*/
     let mut game = game_builder.build(game_data)?;
     game.run();
     Ok(())

@@ -5,11 +5,11 @@ members = [
     "runtime",
 ]
 
-[patch.'https://github.com/jojolepro/amethyst-extra']
-amethyst_extra = { path = "../../amethyst-extra" }
-
-[patch.'https://github.com/jojolepro/specs-physics']
-specs-physics = { path = "../../specs-physics" }
-
-[patch.'https://github.com/jojolepro/amethyst']
-specs-physics = { path = "../../amethyst" }
+#[patch.'https://github.com/jojolepro/amethyst-extra']
+#amethyst_extra = { path = "../../amethyst-extra" }
+#
+#[patch.'https://github.com/jojolepro/specs-physics']
+#specs-physics = { path = "../../specs-physics" }
+#
+#[patch.'https://github.com/jojolepro/amethyst']
+#specs-physics = { path = "../../amethyst" }

@@ -48,10 +48,10 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
 
         let player_settings = (*data.world.read_resource::<PlayerSettings>()).clone();
 
-        set_discord_state(
+        /*set_discord_state(
             format!("Hoppin On: {}", display_name.clone()),
             &mut data.world,
-        );
+        );*/
 
         let scene_handle: Option<Handle<GltfSceneAsset>> = data.world.read_resource::<AssetLoader>().load(
             //&format!("../../{}",gltf_path_from_map(&get_working_dir(), &name)),
@@ -126,8 +126,6 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
                 p
             })
             .collect::<Vec<_>>();
-        //let shape = ShapeHandle::new(Cylinder::new(0.4, 0.2));
-        //let shape = ShapeHandle::new(Ball::new(0.2));
         let shape = ShapeHandle::new(
             ConvexHull::try_from_points(&s)
                 .expect("Failed to create player collision hull from points"),

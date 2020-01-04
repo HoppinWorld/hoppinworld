@@ -22,7 +22,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for LoginState {
             .exec(|mut creator: UiCreator| creator.create("base/prefabs/login_ui.ron", ()));
         add_removal_to_entity(ui_root, RemovalId::LoginUi, &mut data.world);
 
-        set_discord_state(String::from("Login"), &mut data.world);
+        //set_discord_state(String::from("Login"), &mut data.world);
     }
 
     fn update(&mut self, mut data: StateData<GameData>) -> CustomTrans<'a, 'b> {

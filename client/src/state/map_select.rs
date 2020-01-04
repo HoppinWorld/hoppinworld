@@ -47,7 +47,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapSelectState {
             add_removal_to_entity(tup.1.text_entity, RemovalId::MapSelectUi, &mut data.world);
         }
 
-        set_discord_state(String::from("Main Menu"), &mut data.world);
+        //set_discord_state(String::from("Main Menu"), &mut data.world);
     }
 
     fn update(&mut self, data: StateData<GameData>) -> CustomTrans<'a, 'b> {
