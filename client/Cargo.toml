@@ -1,0 +1,27 @@
+[package]
+name = "hoppinworld"
+version = "0.1.0"
+authors = ["Joël Lupien (Jojolepro) <jojolepromain@gmail.com>"]
+
+[dependencies]
+amethyst = { git = "https://github.com/jojolepro/amethyst", branch = "hoppinworld", features = ["vulkan", "gltf", "animation", "nightly"] }
+amethyst-extra = { path = "../amethyst-extra" }
+hoppinworld_data = { path = "../data" }
+hoppinworld_runtime = { path = "../runtime" }
+
+num-traits = "0.2"
+hyper = "0.12.11"
+hyper-tls = "0.3.1"
+tokio = "0.1.7"
+tokio-executor = "0.1.0"
+serde = { version = "1", features = ["serde_derive"] }
+log = "0.4"
+winit = "0.17.0"
+partial_function = "0.4.0"
+derive-new = "0.5"
+uuid = { version = "0.7.1", features = ["v4", "serde"] }
+ron = "0.4"
+serde_json = "1.0.32"
+crossbeam-channel = "0.3.1"
+#self_update = {git = "https://github.com/jojolepro/self_update", branch = "master" }
+

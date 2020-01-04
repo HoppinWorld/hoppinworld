@@ -1,0 +1,9 @@
+[package]
+name = "hoppinworld_data"
+version = "0.1.0"
+authors = ["Joël Lupien (Jojolepro) <jojolepromain@gmail.com>"]
+
+[dependencies]
+cgmath = { version = "0.16", features = ["serde"] }
+serde = { version = "1", features = ["serde_derive"] }
+uuid = { version = "0.7.1", features = ["v4", "serde"] }
