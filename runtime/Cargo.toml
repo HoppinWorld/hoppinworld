@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 amethyst = { git = "https://github.com/jojolepro/amethyst", branch = "hoppinworld" }
-amethyst-extra = { path = "../amethyst-extra" }
+amethyst-extra = { git = "https://github.com/jojolepro/amethyst-extra", branch = "hoppinworld" }
 hoppinworld_data = { path = "../data" }
 hyper = "0.12.11"
 hyper-tls = "0.3.1"
