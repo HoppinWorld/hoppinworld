@@ -4,7 +4,7 @@ use amethyst::prelude::*;
 use amethyst::input::VirtualKeyCode;
 use amethyst::ui::*;
 use amethyst::utils::removal::*;
-use amethyst_extra::{set_discord_state, AssetLoader};
+use amethyst_extra::{AssetLoader};
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
 use crate::resource::{CurrentMap, MapInfoCache};
 use crate::state::*;
@@ -13,7 +13,7 @@ use crate::state::*;
 pub struct MapSelectState;
 
 impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapSelectState {
-    fn on_start(&mut self, mut data: StateData<GameData>) {
+    fn on_start(&mut self, data: StateData<GameData>) {
         let ui_root = data
             .world
             .exec(|mut creator: UiCreator| creator.create("base/prefabs/map_select_ui.ron", ()));

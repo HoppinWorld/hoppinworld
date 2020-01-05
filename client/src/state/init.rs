@@ -1,6 +1,6 @@
 use amethyst::controls::HideCursor;
 use amethyst::prelude::*;
-use amethyst::renderer::*;
+
 use amethyst::renderer::resources::AmbientColor;
 use amethyst::renderer::palette::*;
 use amethyst::utils::application_root_dir;

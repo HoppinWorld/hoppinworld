@@ -2,7 +2,7 @@ use amethyst::ecs::SystemData;
 use amethyst::prelude::*;
 use amethyst::ui::*;
 use amethyst::utils::removal::*;
-use amethyst_extra::set_discord_state;
+
 use amethyst_extra::dirty::Dirty;
 use amethyst::core::Time;
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
@@ -25,7 +25,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for LoginState {
         //set_discord_state(String::from("Login"), &mut data.world);
     }
 
-    fn update(&mut self, mut data: StateData<GameData>) -> CustomTrans<'a, 'b> {
+    fn update(&mut self, data: StateData<GameData>) -> CustomTrans<'a, 'b> {
         data.data.update(&data.world);
 
         let auth = &mut data.world.fetch_mut::<Dirty<Auth>>();

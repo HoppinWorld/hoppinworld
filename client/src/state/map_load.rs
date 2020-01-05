@@ -43,7 +43,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
         let pg = ProgressCounter::new();
 
         let name = data.world.read_resource::<CurrentMap>().0.clone();
-        let display_name = data.world.read_resource::<CurrentMap>().1.name.clone();
+        let _display_name = data.world.read_resource::<CurrentMap>().1.name.clone();
 
         let player_settings = (*data.world.read_resource::<PlayerSettings>()).clone();
 
@@ -106,7 +106,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
         let s = amethyst::renderer::shape::Shape::Cylinder(12, None)
             .generate_vertices::<Vec<PosTex>>(None)
             .into_iter()
-            .map(|mut pt| {
+            .map(|pt| {
                 let mut p = player_rotation * Point3::from(pt.position.0);
                 p.x *= player_scale.x;
                 p.y *= player_scale.y;
@@ -117,7 +117,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
         let s2 = amethyst::renderer::shape::Shape::Cylinder(12, None)
             .generate_vertices::<Vec<PosTex>>(None)
             .into_iter()
-            .map(|mut pt| {
+            .map(|pt| {
                 let mut p = player_rotation * Point3::from(pt.position.0);
                 p.x *= player_scale.x * 0.95;
                 p.y *= 0.1;
@@ -156,7 +156,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
             ColliderComponent(ColliderDesc::new(shape)
                 .set_collision_groups(ObjectType::Player.into()) // Player
                 .set_material(physics_mat.clone())
-                .build(BodyPartHandle(player_entity, 0))));
+                .build(BodyPartHandle(player_entity, 0)))).expect("Failed to create player entity");
 
         // Create the main camera
         let tr = Transform::from(Vector3::new(0.0, 0.25, 0.0));
@@ -186,7 +186,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
                 .set_collision_groups(ObjectType::PlayerFeet.into()) // Player Feet
                 .set_material(physics_mat.clone())
                 .set_is_sensor(true)
-                .build(BodyPartHandle(ground_collider, 0))));
+                .build(BodyPartHandle(ground_collider, 0)))).expect("Failed to create player ground collider entity");
 
         // Assign secondary collider to player's Grounded component
         grounded.watch_entity = Some(ground_collider);
@@ -232,13 +232,13 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
                 let mut max_segment = 0;
                 self.init_done = true;
 
-                let max_segment = {
+                let _max_segment = {
                     let (
-                        mut transforms,
+                        _transforms,
                         mut colliders,
                         mut object_types,
                         mut meshes,
-                        players,
+                        _players,
                         mut removals,
                         mut ground_checks,
                     ) = <(

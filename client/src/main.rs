@@ -1,4 +1,3 @@
-#[macro_use]
 extern crate amethyst;
 #[macro_use]
 extern crate serde;
@@ -17,26 +16,26 @@ extern crate derive_builder;*/
 
 use amethyst::assets::*;
 use amethyst::controls::*;
-use amethyst::controls::{CursorHideSystem, MouseFocusUpdateSystem};
-use amethyst::core::math::Point3;
+
+
 use amethyst::core::transform::TransformBundle;
-use amethyst::core::{Named, Time, Transform};
+use amethyst::core::{Transform};
 use amethyst::ecs::*;
 use amethyst::input::*;
 use amethyst::prelude::*;
 use amethyst::renderer::*;
 use amethyst::renderer::types::DefaultBackend;
-use amethyst::shrev::{EventChannel, ReaderId};
+
 use amethyst::ui::*;
 use amethyst::utils::application_root_dir;
-use amethyst::utils::removal::Removal;
+
 use amethyst_extra::nphysics_ecs::*;
 use amethyst::gltf::*;
 use crossbeam_channel::Sender;
 use hoppinworld_runtime::*;
 use amethyst_extra::dirty::Dirty;
-use std::collections::VecDeque;
-use std::sync::{Arc, Mutex};
+
+
 
 use amethyst::core::math::Vector3;
 use amethyst::utils::fps_counter::FpsCounterBundle;
@@ -52,11 +51,11 @@ pub mod state;
 pub mod system;
 pub mod util;
 
-use self::component::*;
+
 use self::resource::*;
 use self::state::*;
 use self::system::*;
-use self::util::*;
+
 
 pub fn do_login(
     future_runtime: &mut Runtime,
@@ -173,7 +172,7 @@ pub fn validate_auth_token(
 
             result.into_body().for_each(move |chunk| {
                 let valid = match serde_json::from_slice::<bool>(&chunk) {
-                    Ok(a) => true,
+                    Ok(_a) => true,
                     Err(e) => {
                         error!("Failed to parse received data to validation bool: {}", e);
                         false

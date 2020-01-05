@@ -1,9 +1,9 @@
-use amethyst::core::math::{Point3, Vector2, Vector3};
+use amethyst::core::math::{Vector2, Vector3};
 use amethyst::core::{Time, Transform};
 use amethyst::ecs::{
-    Entities, Entity, Join, Read, ReadExpect, ReadStorage, System, Write, WriteStorage,
+    Entities, Join, Read, ReadExpect, ReadStorage, System, Write, WriteStorage,
 };
-use amethyst::shrev::{EventChannel, ReaderId};
+use amethyst::shrev::{EventChannel};
 use amethyst_extra::nphysics_ecs::*;
 use amethyst_extra::BhopMovement3D;
 use hoppinworld_runtime::{CustomStateEvent, ObjectType, PlayerTag, RuntimeProgress};
@@ -80,7 +80,7 @@ impl<'a> System<'a> for ContactSystem {
                     }
                     // Also limit player velocity while touching the StartZone to prevent any early starts.
                     // Not sure if this should go into state or not. Since it is heavily related to gameplay I'll put it here.
-                    for (entity, _, movement, mut rb) in
+                    for (entity, _, movement, rb) in
                         (&*entities, &players, &bhop_movements, &mut rigid_bodies).join()
                     {
                         if entity == player_entity {
