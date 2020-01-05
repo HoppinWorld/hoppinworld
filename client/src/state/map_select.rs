@@ -6,14 +6,14 @@ use amethyst::input::*;
 use amethyst::prelude::*;
 use amethyst::ui::*;
 use amethyst::utils::removal::*;
-use amethyst_extra::AssetLoader;
+use amethyst_extra::{AssetLoader, set_discord_state};
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
 
 #[derive(Default)]
 pub struct MapSelectState;
 
 impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapSelectState {
-    fn on_start(&mut self, data: StateData<GameData>) {
+    fn on_start(&mut self, mut data: StateData<GameData>) {
         let ui_root = data
             .world
             .exec(|mut creator: UiCreator| creator.create("base/prefabs/map_select_ui.ron", ()));
@@ -54,7 +54,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapSelectState {
             );
         }
 
-        //set_discord_state(String::from("Main Menu"), &mut data.world);
+        set_discord_state(String::from("Main Menu"), &mut data.world);
     }
 
     fn update(&mut self, data: StateData<GameData>) -> CustomTrans<'a, 'b> {

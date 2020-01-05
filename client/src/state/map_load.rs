@@ -43,14 +43,14 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
         let pg = ProgressCounter::new();
 
         let name = data.world.read_resource::<CurrentMap>().0.clone();
-        let _display_name = data.world.read_resource::<CurrentMap>().1.name.clone();
+        let display_name = data.world.read_resource::<CurrentMap>().1.name.clone();
 
         let player_settings = (*data.world.read_resource::<PlayerSettings>()).clone();
 
-        /*set_discord_state(
+        set_discord_state(
             format!("Hoppin On: {}", display_name.clone()),
             &mut data.world,
-        );*/
+        );
 
         let scene_handle: Option<Handle<GltfSceneAsset>> =
             data.world.read_resource::<AssetLoader>().load(

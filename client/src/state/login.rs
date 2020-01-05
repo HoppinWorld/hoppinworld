@@ -7,6 +7,7 @@ use crate::state::*;
 use crate::{add_removal_to_entity, do_login, validate_auth_token, Auth};
 use amethyst::core::Time;
 use amethyst_extra::dirty::Dirty;
+use amethyst_extra::set_discord_state;
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
 use tokio::runtime::Runtime;
 
@@ -22,7 +23,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for LoginState {
             .exec(|mut creator: UiCreator| creator.create("base/prefabs/login_ui.ron", ()));
         add_removal_to_entity(ui_root, RemovalId::LoginUi, &mut data.world);
 
-        //set_discord_state(String::from("Login"), &mut data.world);
+        set_discord_state(String::from("Login"), &mut data.world);
     }
 
     fn update(&mut self, data: StateData<GameData>) -> CustomTrans<'a, 'b> {
