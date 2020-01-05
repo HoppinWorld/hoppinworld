@@ -365,6 +365,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
         }
 
         data.data.update(&data.world);
+
         Trans::None
     }
 }
