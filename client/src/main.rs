@@ -47,9 +47,6 @@ use self::state::*;
 use self::system::*;
 use self::util::*;
 
-
-
-
 /*fn update() -> Result<(), Box<::std::error::Error>> {
     let target = self_update::get_target()?;
     let releases = self_update::backends::github::ReleaseList::configure()
@@ -95,22 +92,6 @@ use self::util::*;
 }*/
 
 fn main() -> amethyst::Result<()> {
-    /*
-
-
-    unique maps to be more than a cs port
-    pushed by triggered explosion
-
-    maps totally reset to origin when restarting, thus allowing for cool runtime effects
-    possible puzzles?
-
-    hidden doors
-    levers activating hidden doors later in the level
-
-
-
-    */
-
     if cfg!(debug_assertions) {
         amethyst::start_logger(Default::default());
     } else {
@@ -133,18 +114,6 @@ fn main() -> amethyst::Result<()> {
     let display_config_path = asset_loader.resolve_path("config/display.ron").unwrap();
 
     let key_bindings_path = asset_loader.resolve_path("config/input.ron").unwrap();
-
-    // Idea: Show states on StateMachine stack
-    // Idea: Time controls (time scale, change manually, etc) core::Time
-    // Idea: Clicking on an entity reference inside a component leads to the entity's components
-    // Idea: StateEvent<T> history with timestamps
-    // Idea: Follow EventChannel. On start, register reader id, then do the same as for StateEvent<T>
-
-    // Issue: If the resource is not present, the game will crash on launch. Solution: Option<Read<T>>
-    // issue thread '<unnamed>' panicked at 'Failed to send message: Os { code: 90, kind: Other, message: "Message too long" }', libcore/result.rs:1009:5
-    // Issue: Laggy as hell. 34 entites, 150 components
-    // Issue: thread '<unnamed>' panicked at 'Failed to send message: Os { code: 111, kind: ConnectionRefused, message: "Connection refused" }
-    //   a.k.a can't run without the editor open, which is not really convenient ^^
 
     /*let components = type_set![Transform, UiTransform, UiText, Removal<RemovalId>, ObjectType, BhopMovement3D, UiButton, FlyControlTag,RotationControl, Camera,Light, Named];
 
