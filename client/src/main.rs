@@ -50,6 +50,7 @@ pub mod util;
 use self::resource::*;
 use self::state::*;
 use self::system::*;
+use self::util::*;
 
 pub fn do_login(
     future_runtime: &mut Runtime,
@@ -401,15 +402,13 @@ fn main() -> amethyst::Result<()> {
     .with_resource(AssetLoaderInternal::<FontAsset>::new())
     .with_resource(AssetLoaderInternal::<Prefab<GltfPrefab>>::new())
     .with_resource(noclip)
+    .with_resource(DiscordThreadHolder::new(init_discord_rich_presence()))
     .with_resource(Widgets::<UiButton, String>::default());
+
     if let Some(dirty) = auto_save_dirty {
         game_builder = game_builder.with_resource(dirty);
     }
 
-    // TODO: fix discord presence
-    /*if let Ok(discord) = init_discord_rich_presence() {
-        game_builder = game_builder.with_resource(discord);
-    }*/
     let mut game = game_builder.build(game_data)?;
     game.run();
     Ok(())

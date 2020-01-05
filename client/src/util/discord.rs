@@ -1,5 +1,6 @@
+use amethyst_extra::DiscordRichPresence;
 
-fn init_discord_rich_presence() -> Result<DiscordRichPresence, ()> {
+pub fn init_discord_rich_presence() -> DiscordRichPresence {
     DiscordRichPresence::new(
         498979571933380609,
         "Main Menu".to_string(),

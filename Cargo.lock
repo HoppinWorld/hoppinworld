@@ -109,7 +109,7 @@ dependencies = [
 [[package]]
 name = "amethyst-extra"
 version = "0.4.0"
-source = "git+https://github.com/jojolepro/amethyst-extra?branch=hoppinworld#66c72c6749df59fd834c10efdc908a47c358bf27"
+source = "git+https://github.com/jojolepro/amethyst-extra?branch=hoppinworld#205b5a2f6cad60b6298316f175106a0e4388eb32"
 dependencies = [
  "amethyst",
  "crossbeam-channel",
@@ -658,9 +658,9 @@ checksum = "7ba5a5c4df8ac8673f22698f443ef1ce3853d7f22d5a15ebf66b9a7553b173dd"
 
 [[package]]
 name = "blake2b_simd"
-version = "0.5.9"
+version = "0.5.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b83b7baab1e671718d78204225800d6b170e648188ac7dc992e9d6bddf87d0c0"
+checksum = "d8fb2d74254a3a0b5cac33ac9f8ed0e44aa50378d9dbb2e5d83bd21ed1dc2c8a"
 dependencies = [
  "arrayref",
  "arrayvec 0.5.1",
@@ -1212,13 +1212,16 @@ checksum = "212d0f5754cb6769937f4501cc0e67f4f4483c8d2c3e1e922ee9edbe4ab4c7c0"
 
 [[package]]
 name = "discord-rpc-client"
-version = "0.2.4"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "18f02d9ab70630f6b38fce2756ab41feca1d3337baa4b1861191002ac2fd8966"
+checksum = "b176996f649824caad056133be782350e287687a5cae43636215f6b153bac481"
 dependencies = [
  "byteorder",
+ "bytes",
+ "crossbeam-channel",
  "log 0.4.8",
  "named_pipe",
+ "parking_lot 0.7.1",
  "serde",
  "serde_derive",
  "serde_json",
@@ -2859,6 +2862,16 @@ dependencies = [
 
 [[package]]
 name = "parking_lot"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ab41b4aed082705d1056416ae4468b6ea99d52599ecf3169b00088d43113e337"
+dependencies = [
+ "lock_api 0.1.5",
+ "parking_lot_core 0.4.0",
+]
+
+[[package]]
+name = "parking_lot"
 version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f842b1982eb6c2fe34036a4fbfb06dd185a3f5c8edfaacdf7d1ea10b07de6252"
@@ -2876,6 +2889,19 @@ checksum = "ad7f7e6ebdc79edff6fdcb87a55b620174f7a989e3eb31b65231f4af57f00b8c"
 dependencies = [
  "libc",
  "rand 0.5.6",
+ "rustc_version",
+ "smallvec 0.6.13",
+ "winapi 0.3.8",
+]
+
+[[package]]
+name = "parking_lot_core"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "94c8c7923936b28d546dfd14d4472eaf34c99b14e1c973a32b3e6d4eb04298c9"
+dependencies = [
+ "libc",
+ "rand 0.6.5",
  "rustc_version",
  "smallvec 0.6.13",
  "winapi 0.3.8",
