@@ -1,19 +1,16 @@
+use crate::RelativeTimer;
 use amethyst::core::math::{Vector2, Vector3};
 use amethyst::core::{Time, Transform};
-use amethyst::ecs::{
-    Entities, Join, Read, ReadExpect, ReadStorage, System, Write, WriteStorage,
-};
-use amethyst::shrev::{EventChannel};
+use amethyst::ecs::{Entities, Join, Read, ReadExpect, ReadStorage, System, Write, WriteStorage};
+use amethyst::shrev::EventChannel;
 use amethyst_extra::nphysics_ecs::*;
 use amethyst_extra::BhopMovement3D;
 use hoppinworld_runtime::{CustomStateEvent, ObjectType, PlayerTag, RuntimeProgress};
-use crate::RelativeTimer;
 
 /// Very game dependent.
 /// Don't try to make that generic.
 #[derive(Default)]
-pub struct ContactSystem {
-}
+pub struct ContactSystem {}
 
 impl<'a> System<'a> for ContactSystem {
     type SystemData = (
@@ -90,7 +87,11 @@ impl<'a> System<'a> for ContactSystem {
                             let cur_vel_flat_mag = cur_vel_flat.magnitude();
                             if cur_vel_flat_mag >= max_vel {
                                 cur_vel_flat = cur_vel_flat.normalize() * max_vel;
-                                rb.set_linear_velocity(Vector3::new(cur_vel_flat.x, cur_vel3.y, cur_vel_flat.y));
+                                rb.set_linear_velocity(Vector3::new(
+                                    cur_vel_flat.x,
+                                    cur_vel3.y,
+                                    cur_vel_flat.y,
+                                ));
                             }
                         }
                     }

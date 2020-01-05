@@ -3,12 +3,12 @@ use amethyst::prelude::*;
 use amethyst::ui::*;
 use amethyst::utils::removal::*;
 
-use amethyst_extra::dirty::Dirty;
-use amethyst::core::Time;
-use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
 use crate::state::*;
-use tokio::runtime::Runtime;
 use crate::{add_removal_to_entity, do_login, validate_auth_token, Auth};
+use amethyst::core::Time;
+use amethyst_extra::dirty::Dirty;
+use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
+use tokio::runtime::Runtime;
 
 #[derive(Default)]
 pub struct LoginState;
@@ -33,7 +33,11 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for LoginState {
             if auth.read().should_validate() {
                 // Start validation
                 auth.write().set_validating();
-                validate_auth_token(&mut data.world.write_resource(), auth.token.clone(), data.world.read_resource::<CallbackQueue>().send_handle());
+                validate_auth_token(
+                    &mut data.world.write_resource(),
+                    auth.token.clone(),
+                    data.world.read_resource::<CallbackQueue>().send_handle(),
+                );
             }
         } else {
             // Valid

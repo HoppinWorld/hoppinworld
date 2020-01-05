@@ -17,25 +17,22 @@ extern crate derive_builder;*/
 use amethyst::assets::*;
 use amethyst::controls::*;
 
-
 use amethyst::core::transform::TransformBundle;
-use amethyst::core::{Transform};
+use amethyst::core::Transform;
 use amethyst::ecs::*;
 use amethyst::input::*;
 use amethyst::prelude::*;
-use amethyst::renderer::*;
 use amethyst::renderer::types::DefaultBackend;
+use amethyst::renderer::*;
 
 use amethyst::ui::*;
 use amethyst::utils::application_root_dir;
 
-use amethyst_extra::nphysics_ecs::*;
 use amethyst::gltf::*;
+use amethyst_extra::dirty::Dirty;
+use amethyst_extra::nphysics_ecs::*;
 use crossbeam_channel::Sender;
 use hoppinworld_runtime::*;
-use amethyst_extra::dirty::Dirty;
-
-
 
 use amethyst::core::math::Vector3;
 use amethyst::utils::fps_counter::FpsCounterBundle;
@@ -51,11 +48,9 @@ pub mod state;
 pub mod system;
 pub mod util;
 
-
 use self::resource::*;
 use self::state::*;
 use self::system::*;
-
 
 pub fn do_login(
     future_runtime: &mut Runtime,
@@ -83,7 +78,10 @@ pub fn do_login(
                     Ok(a) => queue
                         .send(Box::new(move |world| {
                             world.write_resource::<Dirty<Auth>>().write().token = a.token.clone();
-                            world.write_resource::<Dirty<Auth>>().write().set_validated(true);
+                            world
+                                .write_resource::<Dirty<Auth>>()
+                                .write()
+                                .set_validated(true);
                         }))
                         .expect("Failed to push auth callback to future queue"),
                     Err(e) => error!("Failed to parse received data to Auth: {}", e),
@@ -136,8 +134,10 @@ pub fn submit_score(
             result.into_body().for_each(move |chunk| {
                 info!(
                     "{}",
-                    String::from_utf8(chunk.to_vec())
-                        .unwrap_or("Error converting server answer to string after score submission".to_string())
+                    String::from_utf8(chunk.to_vec()).unwrap_or(
+                        "Error converting server answer to string after score submission"
+                            .to_string()
+                    )
                 );
                 Ok(())
             })
@@ -180,7 +180,10 @@ pub fn validate_auth_token(
                 };
                 queue
                     .send(Box::new(move |world| {
-                        world.write_resource::<Dirty<Auth>>().write().set_validated(valid);
+                        world
+                            .write_resource::<Dirty<Auth>>()
+                            .write()
+                            .set_validated(valid);
                     }))
                     .expect("Failed to push auth validation callback to future queue");
                 Ok(())
@@ -194,7 +197,6 @@ pub fn validate_auth_token(
         });
     future_runtime.spawn(future);
 }
-
 
 fn init_discord_rich_presence() -> Result<DiscordRichPresence, ()> {
     DiscordRichPresence::new(
@@ -274,7 +276,7 @@ fn main() -> amethyst::Result<()> {
         amethyst::start_logger(amethyst::LoggerConfig {
             stdout: amethyst::StdoutLog::Colored,
             level_filter: amethyst::LogLevelFilter::Error,
-            log_file: None,// TODO some
+            log_file: None, // TODO some
             allow_env_override: false,
             ..Default::default()
         });
@@ -338,7 +340,9 @@ fn main() -> amethyst::Result<()> {
     );*/
 
     let noclip = NoClip::<StringBindings>::new(String::from("noclip"));
-    let (auto_save_sys, auto_save_dirty) = AutoSaveSystem::<Auth>::new(resources_directory.to_str().unwrap().to_owned() + "/../auth_token.ron");
+    let (auto_save_sys, auto_save_dirty) = AutoSaveSystem::<Auth>::new(
+        resources_directory.to_str().unwrap().to_owned() + "/../auth_token.ron",
+    );
 
     let game_data = GameDataBuilder::default()
         .with(RelativeTimerSystem, "relative_timer", &[])

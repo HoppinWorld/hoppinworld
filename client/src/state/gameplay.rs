@@ -1,11 +1,11 @@
+use crate::state::*;
 use amethyst::controls::HideCursor;
 use amethyst::core::Time;
+use amethyst::input::VirtualKeyCode;
 use amethyst::input::*;
 use amethyst::prelude::*;
-use amethyst::input::VirtualKeyCode;
 use amethyst::utils::removal::*;
 use hoppinworld_runtime::{AllEvents, CustomStateEvent, CustomTrans, RemovalId};
-use crate::state::*;
 
 #[derive(Default)]
 pub struct GameplayState;

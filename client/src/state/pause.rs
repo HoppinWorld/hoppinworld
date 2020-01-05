@@ -1,7 +1,7 @@
 use add_removal_to_entity;
+use amethyst::input::VirtualKeyCode;
 use amethyst::input::*;
 use amethyst::prelude::*;
-use amethyst::input::VirtualKeyCode;
 use amethyst::shrev::EventChannel;
 use amethyst::ui::*;
 use amethyst::utils::removal::*;

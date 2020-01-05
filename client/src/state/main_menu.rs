@@ -1,11 +1,11 @@
+use crate::state::*;
 use add_removal_to_entity;
+use amethyst::core::Time;
 use amethyst::prelude::*;
 use amethyst::ui::*;
 use amethyst::utils::removal::*;
-use amethyst::core::Time;
 use amethyst_extra::set_discord_state;
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
-use crate::state::*;
 
 #[derive(Default)]
 pub struct MainMenuState;

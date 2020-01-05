@@ -1,3 +1,4 @@
+use crate::{sec_to_display, RelativeTimer};
 use amethyst::core::math::Vector3;
 pub use amethyst::ecs::{Join, Read, ReadStorage, System, WriteStorage};
 use amethyst::ui::{UiText, UiTransform};
@@ -5,7 +6,6 @@ use amethyst_extra::nphysics_ecs::*;
 use amethyst_extra::Jump;
 use hoppinworld_data::PlayerStats;
 use hoppinworld_runtime::{PlayerTag, RuntimeProgress};
-use crate::{sec_to_display, RelativeTimer};
 
 const DISPLAY_SPEED_MULTIPLIER: f32 = 50.0;
 

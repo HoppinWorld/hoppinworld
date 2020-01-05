@@ -1,32 +1,32 @@
-use amethyst_extra::nphysics_ecs::ncollide::shape::*;
-use amethyst::core::ecs::prelude::ParallelIterator;
+use crate::resource::CurrentMap;
+use crate::state::{GameplayState, MapSelectState};
+use crate::util::gltf_path_from_map;
+use add_removal_to_entity;
 use amethyst::assets::{Handle, ProgressCounter};
 use amethyst::controls::FlyControlTag;
+use amethyst::core::ecs::prelude::ParallelIterator;
 use amethyst::core::math::{Point3, UnitQuaternion, Vector3};
 use amethyst::core::*;
 use amethyst::ecs::*;
+use amethyst::gltf::{GltfSceneAsset, GltfSceneFormat, GltfSceneOptions, VerticeData};
 use amethyst::prelude::*;
-use amethyst::renderer::*;
 use amethyst::renderer::rendy::mesh::PosTex;
+use amethyst::renderer::*;
 use amethyst::ui::UiCreator;
 use amethyst::utils::removal::Removal;
-use amethyst_extra::nphysics_ecs::nphysics::object::*;
+use amethyst_extra::nphysics_ecs::ncollide::shape::*;
 use amethyst_extra::nphysics_ecs::nphysics::material::*;
+use amethyst_extra::nphysics_ecs::nphysics::object::*;
 use amethyst_extra::nphysics_ecs::nphysics::volumetric::Volumetric;
 use amethyst_extra::nphysics_ecs::*;
 use amethyst_extra::AssetLoader;
 use amethyst_extra::*;
-use amethyst::gltf::{GltfSceneAsset, GltfSceneFormat, GltfSceneOptions, VerticeData};
 use hoppinworld_runtime::{
     AllEvents, CustomTrans, ObjectType, RemovalId, RuntimeMapBuilder, RuntimeProgress,
 };
 use hoppinworld_runtime::{PlayerFeetTag, PlayerSettings, PlayerTag};
 use partial_function::PartialFunctionBuilder;
-use crate::resource::CurrentMap;
-use crate::state::{GameplayState, MapSelectState};
-use crate::util::gltf_path_from_map;
 use verts_from_mesh_data;
-use add_removal_to_entity;
 
 #[derive(Default)]
 pub struct MapLoadState {
@@ -52,19 +52,18 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
             &mut data.world,
         );*/
 
-        let scene_handle: Option<Handle<GltfSceneAsset>> = data.world.read_resource::<AssetLoader>().load(
-            //&format!("../../{}",gltf_path_from_map(&get_working_dir(), &name)),
-            &gltf_path_from_map("../..", &name),
-            GltfSceneFormat(
-                GltfSceneOptions {
+        let scene_handle: Option<Handle<GltfSceneAsset>> =
+            data.world.read_resource::<AssetLoader>().load(
+                //&format!("../../{}",gltf_path_from_map(&get_working_dir(), &name)),
+                &gltf_path_from_map("../..", &name),
+                GltfSceneFormat(GltfSceneOptions {
                     flip_v_coord: true,
                     ..Default::default()
-                }
-            ),
-            &mut data.world.write_resource(),
-            &mut data.world.write_resource(),
-            &data.world.read_resource(),
-        );
+                }),
+                &mut data.world.write_resource(),
+                &mut data.world.write_resource(),
+                &data.world.read_resource(),
+            );
 
         error!("Loading map from {}", &gltf_path_from_map("../..", &name));
 
@@ -72,7 +71,6 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
             error!("Failed to load map!");
             return;
         }
-
 
         self.load_progress = Some(pg);
 
@@ -143,20 +141,27 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
             .with(jump)
             .with(PlayerTag)
             .with(BodyComponent::new(
-                    RigidBodyDesc::new()
-                        .mass(player_settings.mass)
-                        .local_center_of_mass(shape.center_of_mass())
-                        .build()
+                RigidBodyDesc::new()
+                    .mass(player_settings.mass)
+                    .local_center_of_mass(shape.center_of_mass())
+                    .build(),
             ))
             .with(Transform::default())
             .with(Removal::new(RemovalId::Scene))
             .build();
 
-        data.world.write_storage::<ColliderComponent<f32>>().insert(player_entity, 
-            ColliderComponent(ColliderDesc::new(shape)
-                .set_collision_groups(ObjectType::Player.into()) // Player
-                .set_material(physics_mat.clone())
-                .build(BodyPartHandle(player_entity, 0)))).expect("Failed to create player entity");
+        data.world
+            .write_storage::<ColliderComponent<f32>>()
+            .insert(
+                player_entity,
+                ColliderComponent(
+                    ColliderDesc::new(shape)
+                        .set_collision_groups(ObjectType::Player.into()) // Player
+                        .set_material(physics_mat.clone())
+                        .build(BodyPartHandle(player_entity, 0)),
+                ),
+            )
+            .expect("Failed to create player entity");
 
         // Create the main camera
         let tr = Transform::from(Vector3::new(0.0, 0.25, 0.0));
@@ -181,12 +186,19 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
             .with(Removal::new(RemovalId::Scene))
             .build();
 
-        data.world.write_storage::<ColliderComponent<f32>>().insert(ground_collider, 
-            ColliderComponent(ColliderDesc::new(feet_shape)
-                .set_collision_groups(ObjectType::PlayerFeet.into()) // Player Feet
-                .set_material(physics_mat.clone())
-                .set_is_sensor(true)
-                .build(BodyPartHandle(ground_collider, 0)))).expect("Failed to create player ground collider entity");
+        data.world
+            .write_storage::<ColliderComponent<f32>>()
+            .insert(
+                ground_collider,
+                ColliderComponent(
+                    ColliderDesc::new(feet_shape)
+                        .set_collision_groups(ObjectType::PlayerFeet.into()) // Player Feet
+                        .set_material(physics_mat.clone())
+                        .set_is_sensor(true)
+                        .build(BodyPartHandle(ground_collider, 0)),
+                ),
+            )
+            .expect("Failed to create player ground collider entity");
 
         // Assign secondary collider to player's Grounded component
         grounded.watch_entity = Some(ground_collider);
@@ -310,11 +322,13 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
                                 colliders
                                     .insert(
                                         entity,
-                                        ColliderComponent(ColliderDesc::new(ShapeHandle::new(handle))
-                                            .set_collision_groups(obj_type.into()) // Scene or zones
-                                            .set_material(physics_mat.clone())
-                                            .set_is_sensor(is_sensor)
-                                            .build(BodyPartHandle(entity, 0)))
+                                        ColliderComponent(
+                                            ColliderDesc::new(ShapeHandle::new(handle))
+                                                .set_collision_groups(obj_type.into()) // Scene or zones
+                                                .set_material(physics_mat.clone())
+                                                .set_is_sensor(is_sensor)
+                                                .build(BodyPartHandle(entity, 0)),
+                                        ),
                                     )
                                     .expect("Failed to add Collider to map mesh");
                             }
@@ -344,8 +358,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapLoadState {
                     .build(&data.world.read_resource::<CurrentMap>().1)
                     .unwrap();
 
-                data.world
-                    .insert(RuntimeProgress::new(max_segment + 1));
+                data.world.insert(RuntimeProgress::new(max_segment + 1));
             }
         } else if self.init_done {
             return Trans::Switch(Box::new(GameplayState::default()));

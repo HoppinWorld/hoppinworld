@@ -1,16 +1,16 @@
+use crate::resource::CurrentMap;
+use crate::state::MapSelectState;
+use crate::{add_removal_to_entity, sec_to_display, submit_score, Auth, ScoreInsertRequest};
 use amethyst::ecs::SystemData;
 use amethyst::input::is_key_down;
-use amethyst::prelude::*;
 use amethyst::input::VirtualKeyCode;
+use amethyst::prelude::*;
 use amethyst::ui::{
     Anchor, TtfFormat, UiCreator, UiEvent, UiEventType, UiFinder, UiText, UiTransform,
 };
 use amethyst::utils::removal::{exec_removal, Removal};
 use amethyst_extra::AssetLoader;
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId, RuntimeProgress};
-use crate::resource::CurrentMap;
-use crate::state::MapSelectState;
-use crate::{add_removal_to_entity, sec_to_display, submit_score, Auth, ScoreInsertRequest};
 
 #[derive(Default)]
 pub struct ResultState {
