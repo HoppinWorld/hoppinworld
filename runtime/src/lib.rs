@@ -9,8 +9,8 @@ extern crate serde_json;
 extern crate log;
 #[macro_use]
 extern crate derive_new;
-extern crate partial_function;
 extern crate hoppinworld_data;
+extern crate partial_function;
 #[macro_use]
 extern crate lazy_static;
 

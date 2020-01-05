@@ -12,4 +12,3 @@ pub struct PlayerTag;
 impl Component for PlayerTag {
     type Storage = DenseVecStorage<Self>;
 }
-

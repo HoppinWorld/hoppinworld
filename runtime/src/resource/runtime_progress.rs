@@ -1,4 +1,3 @@
-
 #[derive(Debug, Clone, Serialize)]
 pub struct RuntimeProgress {
     pub current_segment: u8,

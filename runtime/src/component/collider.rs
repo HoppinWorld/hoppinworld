@@ -1,6 +1,6 @@
 use amethyst::ecs::*;
-use half_matrix::HalfMatrix;
 use amethyst_extra::nphysics_ecs::ncollide::pipeline::object::CollisionGroups;
+use half_matrix::HalfMatrix;
 
 lazy_static! {
     static ref COLLISION_MATRIX: HalfMatrix = generate_collision_matrix();
@@ -8,14 +8,14 @@ lazy_static! {
 
 #[derive(Debug, Copy, Clone, PartialOrd, PartialEq, Serialize, Deserialize)]
 pub enum ObjectType {
-    Scene, // 0
-    StartZone, // 1
-    EndZone, // 2
-    KillZone, // 3
-    Player, // 4
-    PlayerFeet, // 5
-    Dynamic, // 6
-    Ignore, // 7
+    Scene,           // 0
+    StartZone,       // 1
+    EndZone,         // 2
+    KillZone,        // 3
+    Player,          // 4
+    PlayerFeet,      // 5
+    Dynamic,         // 6
+    Ignore,          // 7
     SegmentZone(u8), // 8
 }
 
@@ -47,20 +47,22 @@ impl From<ObjectType> for u32 {
 
 impl From<ObjectType> for CollisionGroups {
     fn from(o: ObjectType) -> CollisionGroups {
-        CollisionGroups::new().with_membership(&[u32::from(o) as usize]).with_whitelist(whitelist_for_object(o).as_slice())
-   }
+        CollisionGroups::new()
+            .with_membership(&[u32::from(o) as usize])
+            .with_whitelist(whitelist_for_object(o).as_slice())
+    }
 }
 
 pub fn generate_collision_matrix() -> HalfMatrix {
     let mut m = HalfMatrix::new(9);
-    m.enable(4,0); // Player Scene
-    m.enable(4,1);
-    m.enable(4,2);
-    m.enable(4,3);
-    m.enable(4,6);
-    m.enable(4,8);
-    m.enable(5,0); // PlayerFeet Scene
-    m.enable(5,6);
+    m.enable(4, 0); // Player Scene
+    m.enable(4, 1);
+    m.enable(4, 2);
+    m.enable(4, 3);
+    m.enable(4, 6);
+    m.enable(4, 8);
+    m.enable(5, 0); // PlayerFeet Scene
+    m.enable(5, 6);
     m
 }
 
