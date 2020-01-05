@@ -1,16 +1,11 @@
 #[macro_use]
 extern crate amethyst;
-extern crate amethyst_extra;
 #[macro_use]
 extern crate serde;
 #[macro_use]
 extern crate serde_json;
 #[macro_use]
-extern crate log;
-#[macro_use]
 extern crate derive_new;
-extern crate hoppinworld_data;
-extern crate partial_function;
 #[macro_use]
 extern crate lazy_static;
 

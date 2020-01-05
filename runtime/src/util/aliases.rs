@@ -1,4 +1,3 @@
-use crate::component::ObjectType;
 use crate::util::AllEvents;
 use amethyst::prelude::*;
 use amethyst::renderer::rendy::mesh::*;

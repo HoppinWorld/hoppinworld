@@ -1,4 +1,3 @@
-use amethyst_extra::nphysics_ecs::*;
 use amethyst_extra::{BhopMovement3D, GroundFriction3D, Grounded};
 
 #[derive(Debug, new, Clone, Serialize, Deserialize)]
