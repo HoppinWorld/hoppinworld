@@ -1,18 +1,16 @@
 use amethyst::controls::HideCursor;
-use amethyst::core::math::Vector3;
 use amethyst::prelude::*;
 use amethyst::renderer::*;
 use amethyst::renderer::resources::AmbientColor;
 use amethyst::renderer::palette::*;
 use amethyst::utils::application_root_dir;
 use amethyst::utils::removal::*;
-use amethyst_extra::nphysics_ecs::*;
 use hoppinworld_runtime::{
-    generate_collision_matrix, AllEvents, CustomTrans, ObjectType, PlayerSettings, RemovalId,
+    AllEvents, CustomTrans, ObjectType, PlayerSettings, RemovalId,
 };
-use state::login::LoginState;
+use crate::state::login::LoginState;
 use tokio::runtime::Runtime;
-use util::get_all_maps;
+use crate::util::get_all_maps;
 
 #[derive(Default)]
 pub struct InitState;

@@ -1,26 +1,14 @@
 #[macro_use]
 extern crate amethyst;
-extern crate amethyst_extra;
 #[macro_use]
 extern crate serde;
 #[macro_use]
 extern crate serde_json;
 #[macro_use]
 extern crate log;
-extern crate partial_function;
-extern crate winit;
 #[macro_use]
 extern crate derive_new;
-extern crate crossbeam_channel;
-extern crate hoppinworld_data;
-extern crate hoppinworld_runtime;
-extern crate hyper;
-extern crate hyper_tls;
-extern crate num_traits;
-extern crate ron;
-extern crate tokio;
-extern crate tokio_executor;
-extern crate uuid;
+
 //#[macro_use]
 //extern crate self_update;
 

@@ -5,7 +5,7 @@ use amethyst::prelude::*;
 use amethyst::input::VirtualKeyCode;
 use amethyst::utils::removal::*;
 use hoppinworld_runtime::{AllEvents, CustomStateEvent, CustomTrans, RemovalId};
-use state::*;
+use crate::state::*;
 
 #[derive(Default)]
 pub struct GameplayState;

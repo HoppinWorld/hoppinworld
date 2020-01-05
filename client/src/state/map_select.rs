@@ -6,8 +6,8 @@ use amethyst::ui::*;
 use amethyst::utils::removal::*;
 use amethyst_extra::{set_discord_state, AssetLoader};
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
-use resource::{CurrentMap, MapInfoCache};
-use state::*;
+use crate::resource::{CurrentMap, MapInfoCache};
+use crate::state::*;
 
 #[derive(Default)]
 pub struct MapSelectState;
@@ -17,7 +17,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapSelectState {
         let ui_root = data
             .world
             .exec(|mut creator: UiCreator| creator.create("base/prefabs/map_select_ui.ron", ()));
-        add_removal_to_entity(ui_root, RemovalId::MapSelectUi, &mut data.world);
+        add_removal_to_entity(ui_root, RemovalId::MapSelectUi, &mut data.world.write_storage());
 
         let font = data
             .world
@@ -44,7 +44,7 @@ impl<'a, 'b> State<GameData<'a, 'b>, AllEvents> for MapSelectState {
                     .with_position(0.0, -300.0 - 100.0 * accum as f32)
                     .with_anchor(Anchor::TopMiddle)
                     .build_from_world(data.world);
-            add_removal_to_entity(tup.1.text_entity, RemovalId::MapSelectUi, &mut data.world);
+            add_removal_to_entity(tup.1.text_entity, RemovalId::MapSelectUi, &mut data.world.write_storage());
         }
 
         //set_discord_state(String::from("Main Menu"), &mut data.world);

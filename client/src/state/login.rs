@@ -6,9 +6,9 @@ use amethyst_extra::set_discord_state;
 use amethyst_extra::dirty::Dirty;
 use amethyst::core::Time;
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
-use state::*;
+use crate::state::*;
 use tokio::runtime::Runtime;
-use {add_removal_to_entity, do_login, validate_auth_token, Auth};
+use crate::{add_removal_to_entity, do_login, validate_auth_token, Auth};
 
 #[derive(Default)]
 pub struct LoginState;

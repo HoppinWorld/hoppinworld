@@ -7,7 +7,7 @@ use amethyst::shrev::{EventChannel, ReaderId};
 use amethyst_extra::nphysics_ecs::*;
 use amethyst_extra::BhopMovement3D;
 use hoppinworld_runtime::{CustomStateEvent, ObjectType, PlayerTag, RuntimeProgress};
-use RelativeTimer;
+use crate::RelativeTimer;
 
 /// Very game dependent.
 /// Don't try to make that generic.

@@ -1,4 +1,4 @@
-use MapInfoCache;
+use crate::MapInfoCache;
 
 pub fn get_all_maps(base_path: &str) -> MapInfoCache {
     let maps_path = format!(

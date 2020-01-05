@@ -8,9 +8,9 @@ use amethyst::ui::{
 use amethyst::utils::removal::{exec_removal, Removal};
 use amethyst_extra::AssetLoader;
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId, RuntimeProgress};
-use resource::CurrentMap;
-use state::MapSelectState;
-use {add_removal_to_entity, sec_to_display, submit_score, Auth, ScoreInsertRequest};
+use crate::resource::CurrentMap;
+use crate::state::MapSelectState;
+use crate::{add_removal_to_entity, sec_to_display, submit_score, Auth, ScoreInsertRequest};
 
 #[derive(Default)]
 pub struct ResultState {

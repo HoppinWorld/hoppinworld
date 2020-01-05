@@ -2,7 +2,7 @@ use amethyst_extra::nphysics_ecs::ncollide::shape::*;
 use amethyst::core::ecs::prelude::ParallelIterator;
 use amethyst::assets::{Handle, ProgressCounter};
 use amethyst::controls::FlyControlTag;
-use amethyst::core::math::{Isometry3, Matrix3, Point3, UnitQuaternion, Vector3};
+use amethyst::core::math::{Point3, UnitQuaternion, Vector3};
 use amethyst::core::*;
 use amethyst::ecs::*;
 use amethyst::prelude::*;
@@ -21,11 +21,10 @@ use hoppinworld_runtime::{
     AllEvents, CustomTrans, ObjectType, RemovalId, RuntimeMapBuilder, RuntimeProgress,
 };
 use hoppinworld_runtime::{PlayerFeetTag, PlayerSettings, PlayerTag};
-use num_traits::identities::One;
 use partial_function::PartialFunctionBuilder;
-use resource::CurrentMap;
-use state::{GameplayState, MapSelectState};
-use util::gltf_path_from_map;
+use crate::resource::CurrentMap;
+use crate::state::{GameplayState, MapSelectState};
+use crate::util::gltf_path_from_map;
 use verts_from_mesh_data;
 use add_removal_to_entity;
 
