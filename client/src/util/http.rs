@@ -1,6 +1,6 @@
 use amethyst::prelude::*;
-use amethyst_extra::*;
 use amethyst_extra::dirty::Dirty;
+use amethyst_extra::*;
 use crossbeam_channel::Sender;
 use hyper::{Body, Client, Request};
 use hyper_tls::HttpsConnector;

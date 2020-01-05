@@ -28,8 +28,8 @@ use amethyst::ui::*;
 use amethyst::utils::application_root_dir;
 
 use amethyst::gltf::*;
-use amethyst_extra::*;
 use amethyst_extra::nphysics_ecs::*;
+use amethyst_extra::*;
 use crossbeam_channel::Sender;
 use hoppinworld_runtime::*;
 

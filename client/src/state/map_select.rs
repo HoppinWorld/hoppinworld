@@ -6,7 +6,7 @@ use amethyst::input::*;
 use amethyst::prelude::*;
 use amethyst::ui::*;
 use amethyst::utils::removal::*;
-use amethyst_extra::{AssetLoader, set_discord_state};
+use amethyst_extra::{set_discord_state, AssetLoader};
 use hoppinworld_runtime::{AllEvents, CustomTrans, RemovalId};
 
 #[derive(Default)]
